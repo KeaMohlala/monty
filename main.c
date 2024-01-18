@@ -44,7 +44,6 @@ else if (read > 0)
 counter++;
 process_opcode(line, counter, &head, fp);
 }
-free(line);
 line = NULL;
 }
 free_dlistint(head);
