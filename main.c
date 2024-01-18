@@ -1,4 +1,5 @@
 #include "monty.h"
+char **op_tokens = NULL;
 
 /**
 *main- entry point
