@@ -42,8 +42,8 @@ void (*f)(stack_t **stack, unsigned int line_number);
 
 extern char **op_tokens;
 void deallocate_tokens(char **tokens);
-void process_opcode(char *line, unsigned int counter,
-stack_t **stack, FILE *file);
+int process_opcode(char *line, unsigned int counter,
+stack_t **stack);
 char **parse_opcode(char *line, const char *d);
 void free_dlistint(stack_t *head);
 void (*get_op_func(char *s))(stack_t **, unsigned int);
@@ -52,5 +52,6 @@ void op_pall(stack_t **stack, unsigned int line_number);
 void op_pint(stack_t **stack, unsigned int line_number);
 void op_pop(stack_t **stack, unsigned int line_number);
 void op_nod(stack_t **stack, unsigned int line_number);
+void op_swap(stack_t **stack, unsigned int line_number);
 
 #endif

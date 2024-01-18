@@ -15,17 +15,17 @@ temp = malloc(sizeof(stack_t));
 if (temp == NULL)
 {
 fprintf(stderr, "Error: malloc failed\n");
-exit(EXIT_FAILURE);
+return;
 }
-temp->prev = NULL;
-temp->next = NULL;
 data = atoi(op_tokens[1]);
 if (data == 0 && op_tokens[1][0] != '0')
 {
 fprintf(stderr, "L%d: usage: push integer\n", line_number);
-exit(EXIT_FAILURE);
+free(temp);
+return;
 }
 temp->n = data;
+temp->prev = NULL;
 temp->next = *stack;
 if (*stack != NULL)
 (*stack)->prev = temp;
@@ -67,7 +67,7 @@ stack_t *ptr = *stack;
 if (ptr == NULL)
 {
 fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
-exit(EXIT_FAILURE);
+return;
 }
 printf("%d\n", ptr->n);
 }
@@ -85,7 +85,7 @@ stack_t *temp;
 if (*stack == NULL)
 {
 fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
-exit(EXIT_FAILURE);
+return;
 }
 temp = *stack;
 *stack = (*stack)->next;

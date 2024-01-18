@@ -14,6 +14,7 @@ FILE *fp;
 char *line = NULL;
 size_t size = 0;
 unsigned int counter = 0;
+int error_flag = 0;
 ssize_t read = 1;
 stack_t *head = NULL;
 
@@ -34,19 +35,22 @@ exit(EXIT_FAILURE);
 while (read > 0)
 {
 read = getline(&line, &size, fp);
-if (read == -1)
+if (read > 0)
 {
+counter++;
+if (process_opcode(line, counter, &head) != 0)
+{
+error_flag = 1;
+break;
+}
+}
 free(line);
 line = NULL;
 }
-else if (read > 0)
-{
-counter++;
-process_opcode(line, counter, &head, fp);
-}
-line = NULL;
-}
 free_dlistint(head);
+if (fp != NULL)
+{
 fclose(fp);
-return (0);
+}
+return (error_flag ? EXIT_FAILURE : EXIT_SUCCESS);
 }

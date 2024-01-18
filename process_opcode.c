@@ -13,6 +13,7 @@ instruction_t ops[] = {
 {"push", op_push},
 {"pall", op_pall},
 {"pint", op_pint},
+{"swap", op_swap},
 {"pop", op_pop},
 {"nop", op_nod},
 {NULL, NULL}
@@ -95,13 +96,14 @@ return (tokens);
 *@line: pointer to the file line
 *@counter: line number
 *@stack: pointer to the head of the stack
-*@file: pointer to the file
+*Return: if error occurs, returns error flag to main function
 */
 
-void process_opcode(char *line, unsigned int counter,
-stack_t **stack, FILE *file)
+int  process_opcode(char *line, unsigned int counter,
+stack_t **stack)
 {
 void (*op_func)(stack_t **, unsigned int);
+int error_flag = 0;
 
 op_tokens = parse_opcode(line, " \t\n");
 if (*line == '\0' || op_tokens == NULL || *op_tokens == NULL)
@@ -110,7 +112,7 @@ if (*line == '\0' || op_tokens == NULL || *op_tokens == NULL)
 free(line);
 if (op_tokens != NULL)
 deallocate_tokens(op_tokens);
-return;
+return (1);
 }
 /*Get the function associated with the opcode*/
 op_func = get_op_func(op_tokens[0]);
@@ -118,10 +120,7 @@ if (op_func == NULL)
 {
 /*Handle unknown opcode*/
 fprintf(stderr, "L%u: unknown instruction %s\n", counter, op_tokens[0]);
-fclose(file);
-free(line);
-free_dlistint(*stack);
-exit(EXIT_FAILURE);
+error_flag = 1;
 }
 else
 {
@@ -129,6 +128,6 @@ else
 op_func(stack, counter);
 }
 
-free(line);
 deallocate_tokens(op_tokens);
+return (error_flag);
 }
