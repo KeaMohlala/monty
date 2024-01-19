@@ -13,6 +13,7 @@ instruction_t ops[] = {
 {"push", op_push},
 {"pall", op_pall},
 {"pint", op_pint},
+{"add", op_add},
 {"swap", op_swap},
 {"pop", op_pop},
 {"nop", op_nod},
