@@ -9,7 +9,6 @@
 void op_pint(stack_t **stack, unsigned int line_number)
 {
 stack_t *ptr = *stack;
-/*argument not used*/
 
 if (ptr == NULL)
 {

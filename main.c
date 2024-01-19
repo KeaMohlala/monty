@@ -40,6 +40,7 @@ counter++;
 if (process_opcode(line, counter, &head) != 0)
 {
 error_flag = 1;
+free(line);
 break;
 }
 }
