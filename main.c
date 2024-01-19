@@ -28,7 +28,6 @@ if (access(argv[1], R_OK) == -1)
 fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 return (EXIT_FAILURE);
 }
-/*open file*/
 fp = fopen(argv[1], "r");
 if (fp == NULL)
 exit(EXIT_FAILURE);
@@ -49,8 +48,6 @@ line = NULL;
 }
 free_dlistint(head);
 if (fp != NULL)
-{
 fclose(fp);
-}
 return (error_flag ? EXIT_FAILURE : EXIT_SUCCESS);
 }

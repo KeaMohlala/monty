@@ -16,14 +16,14 @@ fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 return;
 }
 
+top = *stack;
+second_top = top->next;
+
 if (top->n == 0)
 {
 fprintf(stderr, "L%d: division by zero\n", line_number);
 return;
 }
-
-top = *stack;
-second_top = top->next;
 
 second_top->n /= top->n;
 if (top->prev != NULL)
