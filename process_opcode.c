@@ -18,6 +18,7 @@ instruction_t ops[] = {
 {"pop", op_pop},
 {"nop", op_nod},
 {"sub", op_sub},
+{"div", op_div},
 {NULL, NULL}
 };
 int i = 0;
